@@ -30,7 +30,7 @@ def mainView(request):
         "telegram": sideBarInfos.telegramLink,
         "youtube": sideBarInfos.youtubeLink,
         "buyMeACoffee": sideBarInfos.buyMeACoffeeLink,
-        "aboutMeText": aboutMeText.text,
+        "aboutMeText": aboutMeText.text.replace("🇮🇷", '<span style="transform: rotate(180deg) perspective(0); display: inline-block;">🇭🇺</span>'),
         "whatIDo": whatIDos,
         "universityAndEducation": universityAndEducations,
         "experiences": experience,

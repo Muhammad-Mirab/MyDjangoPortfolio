@@ -235,7 +235,9 @@
 
                 <section class="about-text">
                     <p>
-                        {{ aboutMeText|linebreaks }}
+                        {% autoescape off %}
+                            {{ aboutMeText|linebreaks|safe }}
+                        {% endautoescape %}
                     </p>
                 </section>
 
