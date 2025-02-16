@@ -31,6 +31,7 @@ def mainView(request):
         "youtube": sideBarInfos.youtubeLink,
         "buyMeACoffee": sideBarInfos.buyMeACoffeeLink,
         "aboutMeText": aboutMeText.text.replace("🇮🇷", '<span style="transform: rotate(180deg) perspective(0); display: inline-block;">🇭🇺</span>'),
+        # "aboutMeText": aboutMeText.text,
         "whatIDo": whatIDos,
         "universityAndEducation": universityAndEducations,
         "experiences": experience,
