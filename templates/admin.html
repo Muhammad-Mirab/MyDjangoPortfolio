@@ -1,0 +1,159 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ name }}</title>
+    <link rel="shortcut icon" href="{% static 'images/logo.ico' %}" type="image/x-icon" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  </head>
+
+  <body>
+    <main>
+      <aside class="sidebar" data-sidebar>
+        <div class="sidebar-info">
+          <figure class="avatar-box" style="overflow: hidden;">
+            <img src="{% static 'images/my-avatar.png' %}" alt="{{ name }}" width="80" />
+          </figure>
+
+          <div class="info-content">
+            <h1 class="name" title="{{ name }}">{{ name }}</h1>
+
+            <p class="title">{{ jobTitle }}</p>
+          </div>
+
+          <button class="info_more-btn" data-sidebar-btn>
+            <span>Show Contacts</span>
+
+            <ion-icon name="chevron-down"></ion-icon>
+          </button>
+        </div>
+
+        <div class="sidebar-info_more">
+          <div class="separator"></div>
+
+          <ul class="contacts-list">
+            <li class="contact-item">
+              <div class="icon-box">
+                <ion-icon name="mail-outline"></ion-icon>
+              </div>
+
+              <div class="contact-info">
+                <p class="contact-title">Email</p>
+
+                <a href="mailto:{{ email }}@{{ mailProvidor }}" class="contact-link" style="font-size: 10px">{{ email }}@<div style="font-size: 7px; display: inline;">{{ mailProvidor }}</div></a>
+              </div>
+            </li>
+
+            <li class="contact-item">
+              <div class="icon-box">
+                <ion-icon name="phone-portrait-outline"></ion-icon>
+              </div>
+
+              <div class="contact-info">
+                <p class="contact-title">Phone</p>
+
+                <a href="tel:+12133522795" class="contact-link">{{ phoneNumber }}</a>
+              </div>
+            </li>
+
+            <li class="contact-item">
+              <div class="icon-box">
+                <ion-icon name="calendar-outline"></ion-icon>
+              </div>
+
+              <div class="contact-info">
+                <p class="contact-title">Birthday</p>
+
+                <time datetime="{{ birthday }}">{{ birthday }}</time>
+              </div>
+            </li>
+
+            <li class="contact-item">
+              <div class="icon-box">
+                <ion-icon name="location-outline"></ion-icon>
+              </div>
+
+              <div class="contact-info">
+                <p class="contact-title">Location</p>
+
+                <address>{{ location }}</address>
+              </div>
+            </li>
+          </ul>
+
+          <div class="separator"></div>
+
+          <ul class="social-list">
+            <li class="social-item">
+              <a href="{{ linedIn }}" class="social-link"><ion-icon name="logo-linkedin"></ion-icon></a>
+            </li>
+
+            <li class="social-item">
+              <a href="{{ github }}" class="social-link"><ion-icon name="logo-github"></ion-icon></a>
+            </li>
+
+            <li class="social-item">
+              <a href="{{ telegram }}" class="social-link"><ion-icon name="paper-plane"></ion-icon></a>
+            </li>
+
+            <li class="social-item">
+              <a href="{{ twitter }}" class="social-link"><ion-icon name="logo-twitter"></ion-icon></a>
+            </li>
+
+            <li class="social-item">
+              <a href="{{ youtube }}" class="social-link"><ion-icon name="logo-youtube"></ion-icon></a>
+            </li>
+
+            <li class="social-item">
+              <a href="{{ buyMeACoffee }}" class="social-link"><ion-icon name="cafe-outline"></ion-icon></a>
+            </li>
+
+            <li class="social-item">
+              <a href="{{ instagram }}" class="social-link"><ion-icon name="logo-instagram"></ion-icon></a>
+            </li>
+          </ul>
+        </div>
+      </aside>
+
+      <div class="main-content">
+        <nav class="navbar">
+          <ul class="navbar-list">
+            <li class="navbar-item">
+              <a href="{% url 'about:mainView' %}" class="navbar-link {% if request.resolver_match.url_name == 'mainView' %}active{% endif %}">About</a>
+            </li>
+            <li class="navbar-item">
+              <a href="{% url 'resume:resumeView' %}" class="navbar-link {% if request.resolver_match.url_name == 'resumeView' %}active{% endif %}">Resume</a>
+            </li>
+            <li class="navbar-item">
+              <a href="{% url 'gallery:galleryView' %}" class="navbar-link {% if request.resolver_match.url_name == 'galleryView' %}active{% endif %}">Gallery</a>
+            </li>
+            <li class="navbar-item">
+              <a href="{% url 'blog:blogView' %}" class="navbar-link {% if request.resolver_match.url_name == 'blogView' %}active{% endif %}">Blog</a>
+            </li>
+            <li class="navbar-item">
+              <a href="{% url 'contact:contactView' %}" class="navbar-link {% if request.resolver_match.url_name == 'contactView' %}active{% endif %}">Contact</a>
+            </li>
+          </ul>
+        </nav>
+        {% block content %}{% endblock %}
+      </div>
+    </main>
+
+    <!-- 
+    - custom js link
+   -->
+    {% comment %} <script src="{% static 'js/script.js' %}"></script> {% endcomment %}
+
+    <!-- 
+    - ionicon link
+   -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  </body>
+</html>

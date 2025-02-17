@@ -3,6 +3,77 @@
 {% load static %}
 {% load form_tags %}
 {% block content %}
+  <style>
+    .comments-list {
+      list-style: none;
+      padding: 0;
+    }
+    .comment-item {
+      background-color:rgb(255 219 112);
+      border-radius: 10px;
+      padding: 10px;
+      margin-bottom: 10px;
+      position: relative;
+    }
+    .comment-item::before {
+      content: "";
+      position: absolute;
+      top: 10px;
+      left: -10px;
+      width: 0;
+      height: 0;
+      border-top: 10px solid transparent;
+      border-bottom: 10px solid transparent;
+      border-right: 10px solid rgb(255 219 112);
+    }
+    .comment-author {
+      font-weight: bold;
+      font-size: medium;
+    }
+    .comment-text {
+      margin: 5px 0;
+    }
+    .comment-time {
+      display: inline;
+      font-size: 0.8em;
+      color: #3b3b3b;
+    }
+    .comments-title {
+      margin-bottom: 15px;
+    }
+    .form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .input-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 0px;
+      margin-bottom: 15px;
+    }
+    {% comment %} .form-input {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      width: 100%;
+    } {% endcomment %}
+    {% comment %} .form-btn {
+      align-self: flex-end;
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    } {% endcomment %}
+    .form-btn ion-icon {
+      margin-right: 5px;
+    }
+  </style>
+
   <article class="blog active" data-page="blog">
     <section class="blog-post" style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
       <figure class="blog-banner-box" style="overflow: hidden;">
@@ -16,28 +87,27 @@
     </section>
 
     <section class="blog-comments" style="margin-top: 2rem;">
-      <h3 class="h3 comments-title">Comments</h3>
       {% if comments %}
+      <h3 class="h3 comments-title">Comments</h3>
         <ul class="comments-list">
           {% for comment in comments %}
           <li class="comment-item">
-            <p class="comment-author">{{ comment.author }}</p>
-            <p class="comment-text">{{ comment.text }}</p>
-            <time datetime="{{ comment.created_on|date:'Y-m-d' }}">{{ comment.created_on|date:'M d, Y' }}</time>
+            <p class="comment-author">{{ comment.author }} | <time class="comment-time" datetime="{{ comment.created_on|date:'Y-m-d' }}">{{ comment.created_on|date:'M d, Y' }}</time></p>
+            <p class="comment-text">{{ comment.body }}</p>
           </li>
           {% endfor %}
         </ul>
       {% else %}
-        <p>No comments yet. Be the first to comment!</p>
+      <p style="color: white; margin: auto; font-size: 20px; text-align: center;">No comments yet...☘️</p>
       {% endif %}
 
       <h3 class="h3 comments-title">Leave a Comment</h3>
       <form method="post" action="{% url 'blog:blogDetail' post.id %}" class="form" data-form>
         {% csrf_token %}
         <div class="input-wrapper">
-          <div class="input-wrapper">
-            {{ form.author|add_class:"form-input" }}
-          </div>
+          {{ form.author|add_class:"form-input" }}
+        </div>
+        <div class="input-wrapper">
           {{ form.body|add_class:"form-input" }}
         </div>
         <button class="form-btn" type="submit" data-form-btn>
