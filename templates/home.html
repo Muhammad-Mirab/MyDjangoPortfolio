@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block content %}
+<article class="about active" data-page="about">
+    <header>
+      <h2 class="h2 article-title">About me</h2>
+    </header>
+
+    <section class="about-text">
+      <p>
+        {% autoescape off %}
+          {{ aboutMeText|linebreaks|safe }}
+        {% endautoescape %}
+      </p>
+    </section>
+
+    <section class="service">
+      <h3 class="h3 service-title">What i'm doing</h3>
+
+      <ul class="service-list">
+        {% for i in whatIDo %}
+          <li class="service-item">
+            <div class="service-icon-box">
+              <img src="/media/{{ i.photo }}" alt="design icon" width="40" />
+            </div>
+
+            <div class="service-content-box">
+              <h4 class="h4 service-item-title">{{ i.title }}</h4>
+
+              <p class="service-item-text">{{ i.info }}</p>
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    <!-- 
+    - testimonials modal
+   -->
+
+    <div class="modal-container" data-modal-container>
+      <div class="overlay" data-overlay></div>
+
+      <section class="testimonials-modal">
+        <button class="modal-close-btn" data-modal-close-btn><ion-icon name="close-outline"></ion-icon></button>
+
+        <div class="modal-img-wrapper">
+          <figure class="modal-avatar-box">
+            <img src="{% static 'images/avatar-1.png' %}" alt="Daniel lewis" width="80" data-modal-img />
+          </figure>
+
+          <img src="{% static 'images/icon-quote.svg' %}" alt="quote icon" />
+        </div>
+
+        <div class="modal-content">
+          <h4 class="h3 modal-title" data-modal-title>Daniel lewis</h4>
+
+          <time datetime="2021-06-14">14 June, 2021</time>
+
+          <div data-modal-text>
+            <p>Azam was hired to create a corporate identity. We were very pleased with the work done. She has a lot of experience and is very concerned about the needs of client. Lorem ipsum dolor sit amet, ullamcous cididt consectetur adipiscing elit, seds do et eiusmod tempor incididunt ut laborels dolore magnarels alia.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- 
+    - clients
+   -->
+
+    <section class="clients" style="display: none">
+      <h3 class="h3 clients-title">Clients</h3>
+
+      <ul class="clients-list has-scrollbar">
+        <li class="clients-item">
+          <a href="#"><img src="{% static 'images/logo-1-color.png' %}" alt="client logo" /></a>
+        </li>
+
+        <li class="clients-item">
+          <a href="#"><img src="{% static 'images/logo-2-color.png' %}" alt="client logo" /></a>
+        </li>
+
+        <li class="clients-item">
+          <a href="#"><img src="{% static 'images/logo-3-color.png' %}" alt="client logo" /></a>
+        </li>
+
+        <li class="clients-item">
+          <a href="#"><img src="{% static 'images/logo-4-color.png' %}" alt="client logo" /></a>
+        </li>
+
+        <li class="clients-item">
+          <a href="#"><img src="{% static 'images/logo-5-color.png' %}" alt="client logo" /></a>
+        </li>
+
+        <li class="clients-item">
+          <a href="#"><img src="{% static 'images/logo-6-color.png' %}" alt="client logo" /></a>
+        </li>
+      </ul>
+    </section>
+  </article>
+
+{% endblock %}

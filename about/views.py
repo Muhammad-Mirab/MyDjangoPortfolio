@@ -1,18 +1,10 @@
 from django.shortcuts import render
-from .models import *
-from resume.models import *
-from gallery.models import *
+from .models import sideBarInfo, aboutMe, whatIDo
 
-# Create your views here.
 def mainView(request):
     sideBarInfos = sideBarInfo.objects.all()[:1].get()
     aboutMeText = aboutMe.objects.all()[:1].get()
     whatIDos = whatIDo.objects.all().filter()
-    universityAndEducations = universityAndEducation.objects.all().filter()
-    experience = experiences.objects.all().filter()
-    skill = skills.objects.all().filter()
-    category = categories.objects.all().filter()
-    galleries = gallery.objects.all().order_by("-date")
     email = sideBarInfos.email
     email = email.split("@")
     context = {
@@ -27,18 +19,7 @@ def mainView(request):
         "github": sideBarInfos.githubLink,
         "twitter": sideBarInfos.twitterLink,
         "instagram": sideBarInfos.instagramLink,
-        "telegram": sideBarInfos.telegramLink,
-        "youtube": sideBarInfos.youtubeLink,
-        "buyMeACoffee": sideBarInfos.buyMeACoffeeLink,
         "aboutMeText": aboutMeText.text.replace("🇮🇷", '<span style="transform: rotate(180deg) perspective(0); display: inline-block;">🇭🇺</span>'),
-        # "aboutMeText": aboutMeText.text,
         "whatIDo": whatIDos,
-        "universityAndEducation": universityAndEducations,
-        "experiences": experience,
-        "skills": skill,
-        "category": category,
-        "gallery": galleries,
     }
-
-    # Render the HTML template index.html with the data in the context variable
-    return render(request, 'index.html', context=context)
+    return render(request, 'home.html', context=context)

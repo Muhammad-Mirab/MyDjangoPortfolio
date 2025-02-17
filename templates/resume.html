@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block content %}
+<article class="resume active" data-page="resume">
+    <header>
+      <h2 class="h2 article-title">Resume</h2>
+    </header>
+
+    <section class="timeline">
+      <div class="title-wrapper">
+        <div class="icon-box">
+          <ion-icon name="book-outline"></ion-icon>
+        </div>
+
+        <h3 class="h3">Education</h3>
+      </div>
+
+      <ol class="timeline-list">
+        {% for i in universityAndEducation %}
+          <li class="timeline-item">
+            <h4 class="h4 timeline-item-title">{{ i.uniName }}</h4>
+
+            <span>{{ i.startDate }} —{% firstof i.endDate 'Present' %}</span>
+
+            <p class="timeline-text">{{ i.about }}</p>
+          </li>
+        {% endfor %}
+      </ol>
+    </section>
+
+    <section class="timeline">
+      <div class="title-wrapper">
+        <div class="icon-box">
+          <ion-icon name="book-outline"></ion-icon>
+        </div>
+
+        <h3 class="h3">Experience</h3>
+      </div>
+
+      <ol class="timeline-list">
+        {% for i in experiences %}
+          <li class="timeline-item">
+            <h4 class="h4 timeline-item-title">{{ i.name }}</h4>
+
+            <span>{{ i.startDate }} —{% firstof i.endDate 'Present' %}</span>
+
+            <p class="timeline-text">{{ i.about }}</p>
+          </li>
+        {% endfor %}
+      </ol>
+    </section>
+
+    <section class="skill">
+      <h3 class="h3 skills-title">My skills</h3>
+
+      <ul class="skills-list content-card">
+        {% for i in skills %}
+          <li class="skills-item">
+            <div class="title-wrapper">
+              <h5 class="h5">{{ i.name }}</h5>
+              <data value="{{ i.percent }}">{{ i.percent }}%</data>
+            </div>
+
+            <div class="skill-progress-bg">
+              <div class="skill-progress-fill" style="width: {{ i.percent }}%;"></div>
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+  </article>
+
+{% endblock %}

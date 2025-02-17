@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block content %}
+  <article class="blog active" data-page="blog">
+    <header>
+      <h2 class="h2 article-title">Blog</h2>
+    </header>
+
+    <section class="blog-posts" style="display: flex; align-items: center; justify-content: center;">
+      <ul class="blog-posts-list">
+        {% for post in posts %}
+        <li class="blog-post-item">
+          <a href="{% url 'blog:blogDetail' post.pk %}">
+            <figure class="blog-banner-box">
+              <img src="/media/{{ post.photo }}" alt="{{ post.title }}" loading="lazy" />
+            </figure>
+
+            <div class="blog-content">
+              <div class="blog-meta">
+                <p class="blog-category">{{ post.category }}</p>
+
+                <span class="dot"></span>
+
+                <time datetime="{{ post.created_on|date:'Y-m-d' }}">{{ post.created_on|date:'M d, Y' }}</time>
+              </div>
+
+              <h3 class="h3 blog-item-title">{{ post.title }}</h3>
+
+              <p class="blog-text">{{ post.excerpt }}</p>
+            </div>
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
+  </article>
+{% endblock %}

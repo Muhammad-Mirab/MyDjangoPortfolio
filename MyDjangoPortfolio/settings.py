@@ -26,21 +26,23 @@ SECRET_KEY = 'django-insecure-lx$3)skv*44)=^61#@r(9j$e=$=+6d$ysj4rqv)urp0'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["mirab.pythonanywhere.com"]
+ALLOWED_HOSTS = ["127.0.0.1", "mirab.pythonanywhere.com"]
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'resume.apps.ResumeConfig',
-    'about.apps.AboutConfig',
-    'gallery.apps.GalleryConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'resume',
+    'about',
+    'gallery',
+    'blog',
+    'contact',
 ]
 
 MIDDLEWARE = [
@@ -66,6 +68,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'about.context_processors.about_context',
             ],
         },
     },

@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block content %}
+<article class="gallery active" data-page="gallery">
+    <header>
+      <h2 class="h2 article-title">Gallery</h2>
+    </header>
+
+    <section class="projects">
+      <ul class="filter-list">
+        {% for i in category %}
+          <li class="filter-item">
+            <button class="active" data-filter-btn>{{ i.categoryName }}</button>
+          </li>
+        {% endfor %}
+      </ul>
+
+      <div class="filter-select-box">
+        <button class="filter-select" data-select>
+          <div class="select-value" data-selecct-value>Select category</div>
+
+          <div class="select-icon">
+            <ion-icon name="chevron-down"></ion-icon>
+          </div>
+        </button>
+
+        <ul class="select-list">
+          {% for i in category %}
+            <li class="select-item">
+              <button data-select-item>{{ i.categoryName }}</button>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <ul class="project-list">
+        {% for i in gallery %}
+          <li class="project-item active" data-filter-item data-category="{{ i.category|lower }}">
+            <a href="/media/{{ i.photo }}">
+              <figure class="project-img">
+                <div class="project-item-icon-box">
+                  <ion-icon name="eye-outline"></ion-icon>
+                </div>
+
+                <img src="/media/{{ i.photo }}" alt="finance" loading="lazy" />
+              </figure>
+
+              <h3 class="project-title">{{ i.location }}</h3>
+
+              <p class="project-category">{{ i.date }}</p>
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+  </article>
+
+{% endblock %}

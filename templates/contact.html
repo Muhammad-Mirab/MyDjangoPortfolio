@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load form_tags %}
+{% block content %}
+<article class="contact active" data-page="contact">
+  <header>
+    <h2 class="h2 article-title">Contact</h2>
+  </header>
+
+  <section class="mapbox" data-mapbox>
+    <figure>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d247.85099741909372!2d59.53712996368542!3d36.30942905424356!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f6c92411648e0d7%3A0xb853e6d12096bf5f!2z2YXYsdqp2LIg2LHYtNivINi02YXYp9ix2YcgNA!5e0!3m2!1sen!2sae!4v1739739714632!5m2!1sen!2sae" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </figure>
+  </section>
+
+  <section class="contact-form">
+    <h3 class="h3 form-title">Contact Form</h3>
+
+    <form method="post" class="form" data-form>
+      {% csrf_token %}
+      <div class="input-wrapper">
+        {{ form.name|add_class:"form-input" }}
+        {{ form.email|add_class:"form-input" }}
+      </div>
+
+      {{ form.message|add_class:"form-input" }}
+
+      <button class="form-btn" type="submit" data-form-btn>
+        <ion-icon name="paper-plane"></ion-icon>
+        <span>Send Message</span>
+      </button>
+    </form>
+  </section>
+</article>
+
+{% endblock %}
